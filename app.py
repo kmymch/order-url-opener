@@ -8,7 +8,7 @@ def open_urls_from_excel(file):
     アップロードされたエクセルファイルからI列のURLを取得し、ブラウザで開く
     """
     df = pd.read_excel(file, engine="openpyxl")
-     st.write(df)
+    st.write(df)
     url_column = df.iloc[:, 8]  # I列(0インデックスでは8番目)
     
     flag = 0
