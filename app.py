@@ -17,6 +17,7 @@ def open_urls_from_excel(file):
             if flag == 0:
                 flag = 1
             #webbrowser.open_new(url)
+            st.write(url)
             js = f"window.open('{url}', '_blank')"
             st.components.v1.html(f"<script>{js}</script>", height=0)
         elif flag == 1:
