@@ -15,10 +15,10 @@ def open_urls_from_excel(file):
     for url in url_column:
         if isinstance(url, str) and url.startswith("http"):
             if flag == 0:
-                webbrowser.open_new(url)
                 flag = 1
-            else:
-                webbrowser.open_new_tab(url)
+            #webbrowser.open_new(url)
+            js = f"window.open('{url}', '_blank')"
+            st.components.v1.html(f"<script>{js}</script>", height=0)
         elif flag == 1:
             break
 
