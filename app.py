@@ -1,5 +1,4 @@
 import streamlit as st
-import openpyxl
 import pandas as pd
 import webbrowser
 from io import BytesIO
