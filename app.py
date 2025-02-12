@@ -19,7 +19,8 @@ def open_urls_from_excel(file):
             #webbrowser.open_new(url)
             st.write(url)
             js = f"window.open('{url}', '_blank')"
-            st.components.v1.html(f"<script>{js}</script>", height=0)
+            #st.components.v1.html(f"<script>{js}</script>", height=0)
+            st.markdown(f'<a href="{url}" target="_blank">Click here</a>', unsafe_allow_html=True)
         elif flag == 1:
             break
 
