@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import webbrowser
 from io import BytesIO
 
 def open_urls_from_excel(file):
@@ -8,6 +7,7 @@ def open_urls_from_excel(file):
     アップロードされたエクセルファイルからI列のURLを取得し、ブラウザで開く
     """
     df = pd.read_excel(file, engine="openpyxl")
+    df = df.astype(str)
     st.write(df)
     url_column = df.iloc[:, 8]  # I列(0インデックスでは8番目)
     
@@ -16,11 +16,9 @@ def open_urls_from_excel(file):
         if isinstance(url, str) and url.startswith("http"):
             if flag == 0:
                 flag = 1
-            #webbrowser.open_new(url)
             st.write(url)
             js = f"window.open('{url}', '_blank')"
-            #st.components.v1.html(f"<script>{js}</script>", height=0)
-            st.markdown(f'<a href="{url}" target="_blank">Click here</a>', unsafe_allow_html=True)
+            st.components.v1.html(f"<script>{js}</script>", height=0)
         elif flag == 1:
             break
 
@@ -32,6 +30,5 @@ uploaded_file = st.file_uploader("エクセルファイルをアップロード�
 
 if uploaded_file is not None:
     st.write("ファイルがアップロードされました！")
-    if st.button("URLを開く"):
-        open_urls_from_excel(BytesIO(uploaded_file.read()))
-        st.success("URLを開きました！")
+    open_urls_from_excel(BytesIO(uploaded_file.read()))
+    st.success("URLを開きました！")
